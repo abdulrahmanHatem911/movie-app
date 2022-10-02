@@ -3,7 +3,7 @@ import 'dart:math';
 //https://api.themoviedb.org/3/movie/610150?api_key=47a5882632510c50e01d28853cd434c6
 class AppConstant {
   static const String BASE_URL = "https://api.themoviedb.org/3";
-  static const String API_KEY = "47a5882632510c50e01d28853cd434c6";
+  static const String API_KEY = "";
   static const String getNowPlayingMove =
       "$BASE_URL/movie/now_playing?api_key=$API_KEY";
   static const String getPopularMovies =
@@ -24,7 +24,13 @@ class AppConstant {
   //get movie cast
   static String getMovieCastPath(int movieId) =>
       "$BASE_URL/movie/$movieId/credits?api_key=$API_KEY&&language=en-US";
-  //
+  // deteils about actor
+  static String getActorDetailsPath(int actorId) =>
+      "$BASE_URL/person/$actorId?api_key=$API_KEY&&language=en-US";
+  static String getActorMovieCreditsPath(int actorId) =>
+      "$BASE_URL/person/$actorId/movie_credits?api_key=$API_KEY&&language=en-US";
+
   static const String baseImageUrl = "https://image.tmdb.org/t/p/w500";
+
   static String imageUrl(String path) => '$baseImageUrl$path';
 }

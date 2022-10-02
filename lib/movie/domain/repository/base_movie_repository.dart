@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:film/movie/domain/entity/actor_details.dart';
 import 'package:film/movie/domain/entity/actors.dart';
 import 'package:film/movie/domain/entity/movie.dart';
 import 'package:film/movie/domain/entity/recommendations_movie.dart';
@@ -25,6 +26,12 @@ abstract class BaseMovieRepository {
   Future<Either<Failure, List<Recommendations>>> getRecommendationsMovies(
       RecommendationParameters parameters);
   Future<Either<Failure, List<Actors>>> getActorsMovie(
+    ActorsParameters parameters,
+  );
+  Future<Either<Failure, ActorDetails>> getActorsMovieDetails(
+    ActorsParameters parameters,
+  );
+  Future<Either<Failure, List<Movie>>> getActorsMovieCredits(
     ActorsParameters parameters,
   );
 }

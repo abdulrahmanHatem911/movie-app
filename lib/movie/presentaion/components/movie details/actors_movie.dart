@@ -1,11 +1,12 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:film/movie/presentaion/controller/bloc/movie_details_bloc.dart';
+import 'package:film/movie/presentaion/screens/actor_detailse_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/utills/contant.dart';
 import '../../../../core/utills/enum.dart';
 import '../../../../core/widgets/loading_widget.dart';
+import '../../controller/movie_details/movie_details_bloc.dart';
 
 class ActorMovieWidget extends StatelessWidget {
   const ActorMovieWidget({super.key});
@@ -29,19 +30,30 @@ class ActorMovieWidget extends StatelessWidget {
                 final actor = state.actorsList[index];
                 return Row(
                   children: [
-                    Container(
-                      width: 60.0,
-                      height: 60.0,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                          image: actor.profilePath == null ||
-                                  actor.profilePath.isEmpty
-                              ? NetworkImage(
-                                  'https://image.tmdb.org/t/p/w500/borthNRiTGa7oKZjLKHuUGUrZdq.jpg')
-                              : NetworkImage(
-                                  '${AppConstant.imageUrl(actor.profilePath)}'),
-                          fit: BoxFit.cover,
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => ActorDetailsScreen(
+                                actorId: actor.id,
+                              ),
+                            ));
+                      },
+                      child: Container(
+                        width: 60.0,
+                        height: 60.0,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            image: actor.profilePath == null ||
+                                    actor.profilePath.isEmpty
+                                ? NetworkImage(
+                                    'https://image.tmdb.org/t/p/w500/borthNRiTGa7oKZjLKHuUGUrZdq.jpg')
+                                : NetworkImage(
+                                    '${AppConstant.imageUrl(actor.profilePath)}'),
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ),
@@ -74,44 +86,6 @@ class ActorMovieWidget extends StatelessWidget {
             ),
           ),
         );
-        // switch (state.actorsState) {
-        //   case RequestState.loading:
-        //     return const LoadingWidgets();
-
-        //   case RequestState.loaded:
-        //     return FadeInUp(
-        //       duration: const Duration(milliseconds: 500),
-        //       child: SizedBox(
-        //         height: 70.0,
-        //         child: ListView.separated(
-        //           shrinkWrap: true,
-        //           scrollDirection: Axis.horizontal,
-        //           padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        //           itemCount: 6,
-        //           itemBuilder: (context, index) {
-        //             return Container(
-        //               color: Colors.yellow,
-        //               width: 30.0,
-        //               height: 70.0,
-        //             );
-        //           },
-        //           separatorBuilder: (context, index) {
-        //             return const SizedBox(
-        //               width: 8.0,
-        //             );
-        //           },
-        //         ),
-        //       ),
-        //     );
-
-        //   case RequestState.error:
-        //     return SizedBox(
-        //       height: 170.0,
-        //       child: Center(
-        //         child: Text(state.actorsMessage),
-        //       ),
-        //     );
-        // }
       },
     );
   }
