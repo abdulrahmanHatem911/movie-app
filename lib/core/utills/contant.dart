@@ -24,7 +24,13 @@ class AppConstant {
   //get movie cast
   static String getMovieCastPath(int movieId) =>
       "$BASE_URL/movie/$movieId/credits?api_key=$API_KEY&&language=en-US";
-  //
+  // deteils about actor
+  static String getActorDetailsPath(int actorId) =>
+      "$BASE_URL/person/$actorId?api_key=$API_KEY&&language=en-US";
+  static String getActorMovieCreditsPath(int actorId) =>
+      "$BASE_URL/person/$actorId/movie_credits?api_key=$API_KEY&&language=en-US";
+
   static const String baseImageUrl = "https://image.tmdb.org/t/p/w500";
+
   static String imageUrl(String path) => '$baseImageUrl$path';
 }

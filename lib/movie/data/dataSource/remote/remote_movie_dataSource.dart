@@ -5,6 +5,7 @@ import 'package:film/movie/data/models/actors_model.dart';
 import 'package:film/movie/data/models/movie_details_model.dart';
 import 'package:film/movie/data/models/movie_model.dart';
 import 'package:film/movie/data/models/recommendation_model.dart';
+import 'package:film/movie/domain/entity/actor_details.dart';
 import 'package:film/movie/domain/entity/actors.dart';
 import 'package:film/movie/domain/entity/movie_details.dart';
 import 'package:film/movie/domain/entity/recommendations_movie.dart';
@@ -16,6 +17,7 @@ import '../../../../core/network/error_model.dart';
 import '../../../../core/utills/contant.dart';
 import '../../../domain/entity/movie.dart';
 import '../../../domain/useCase/get_actors_movie.dart';
+import '../../models/actore_detailes.dart';
 
 abstract class BaseRemoteMovieDataSource {
   Future<List<Movie>> getNowPlayingMovie();
@@ -26,6 +28,8 @@ abstract class BaseRemoteMovieDataSource {
   Future<List<Recommendations>> getRecommendationsMovie(
       RecommendationParameters parameters);
   Future<List<Actors>> getActorsMovie(ActorsParameters parameters);
+  Future<ActorDetails> getActorDetails(ActorsParameters parameters);
+  Future<List<Movie>> getActorMovieCredits(ActorsParameters parameters);
 }
 
 class RemoteMovieDataSource extends BaseRemoteMovieDataSource {
@@ -119,7 +123,7 @@ class RemoteMovieDataSource extends BaseRemoteMovieDataSource {
   @override
   Future<List<Actors>> getActorsMovie(ActorsParameters parameters) async {
     final response =
-        await Dio().get(AppConstant.getMovieCastPath(parameters.movieId));
+        await Dio().get(AppConstant.getMovieCastPath(parameters.movieId!));
     if (response.statusCode == 200) {
       return List<ActorsModel>.from(
         (response.data['cast'] as List).map(
@@ -129,6 +133,33 @@ class RemoteMovieDataSource extends BaseRemoteMovieDataSource {
     } else {
       throw ServerException(
         errorMessageModel: ErrorMessageModel.fromJson(response.data),
+      );
+    }
+  }
+
+  @override
+  Future<ActorDetails> getActorDetails(ActorsParameters parameters) async {
+    final response =
+        await Dio().get(AppConstant.getActorDetailsPath(parameters.actorId!));
+    if (response.statusCode == 200) {
+      return ActorDetailsModel.fromJson(response.data);
+    } else {
+      throw ServerException(
+        errorMessageModel: ErrorMessageModel.fromJson(response.data),
+      );
+    }
+  }
+
+  @override
+  Future<List<Movie>> getActorMovieCredits(ActorsParameters parameters) async {
+    final _response = await Dio()
+        .get(AppConstant.getActorMovieCreditsPath(parameters.actorId!));
+    if (_response.statusCode == 200) {
+      return List<MovieModel>.from(((_response.data['cast'] as List)
+          .map((e) => MovieModel.fromJson(e))));
+    } else {
+      throw ServerException(
+        errorMessageModel: ErrorMessageModel.fromJson(_response.data),
       );
     }
   }

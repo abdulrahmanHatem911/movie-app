@@ -3,7 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:film/core/utills/app_string.dart';
 import 'package:film/core/widgets/loading_widget.dart';
 import 'package:film/movie/domain/entity/movie_details.dart';
-import 'package:film/movie/presentaion/controller/bloc/movie_details_bloc.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -16,6 +16,7 @@ import '../../../core/utills/enum.dart';
 import '../../domain/entity/recommendations_movie.dart';
 import '../components/movie details/actors_movie.dart';
 import '../components/movie details/show_recommendations.dart';
+import '../controller/movie_details/movie_details_bloc.dart';
 
 class MovieDetailScreen extends StatelessWidget {
   final int id;
@@ -50,7 +51,6 @@ class MovieDetailContent extends StatelessWidget {
           case RequestState.loading:
             return LoadingWidgets();
           case RequestState.loaded:
-            print('Movie id is ${state.movieDetails!.id}');
             return CustomScrollView(
               key: const Key('movieDetailScrollView'),
               slivers: [

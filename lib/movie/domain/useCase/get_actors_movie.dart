@@ -20,13 +20,16 @@ class GetActorsMovieUseCase
 }
 
 class ActorsParameters extends Equatable {
-  final int movieId;
+  final int? movieId;
+  final int? actorId;
 
   const ActorsParameters({
-    required this.movieId,
+    this.movieId,
+    this.actorId,
   });
   @override
   List<Object?> get props => [
         movieId,
+        actorId,
       ];
 }
