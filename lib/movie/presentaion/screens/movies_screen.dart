@@ -8,6 +8,7 @@ import 'package:film/movie/presentaion/components/now_playing.dart';
 import 'package:film/movie/presentaion/components/popular_movie.dart';
 import 'package:film/movie/presentaion/components/upcoming_movie.dart';
 import 'package:film/movie/presentaion/controller/movie_bloc.dart';
+import 'package:film/movie/presentaion/screens/search_screen.dart';
 import 'package:film/movie/presentaion/screens/see_more_movie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,9 +32,34 @@ class MainMoviesScreen extends StatelessWidget {
         ..add(GetTopRatedMoviesEvent())
         ..add(GetUpcomingMoviesEvent()),
       child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            'MOVIES',
+            style: GoogleFonts.poppins(
+              color: Colors.white,
+              fontSize: 20.0,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          centerTitle: true,
+          backgroundColor: Colors.transparent,
+          elevation: 0.0,
+          actions: [
+            IconButton(
+              onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => const SearchScreen())),
+              icon: Icon(
+                Icons.search,
+                color: Colors.white,
+              ),
+            ),
+          ],
+        ),
         bottomNavigationBar: const BottomNavigationScreen(),
         body: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
+          // physics: const BouncingScrollPhysics(),
           key: const Key('movieScrollView'),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

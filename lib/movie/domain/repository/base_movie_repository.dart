@@ -9,6 +9,7 @@ import '../../../core/error/failer.dart';
 import '../entity/movie_details.dart';
 import '../useCase/get_actors_movie.dart';
 import '../useCase/get_recommendations_movie.dart';
+import '../useCase/get_search_movie_use_case.dart';
 
 abstract class BaseMovieRepository {
   Future<Either<Failure, List<Movie>>> getNewPlayingMovies();
@@ -33,5 +34,8 @@ abstract class BaseMovieRepository {
   );
   Future<Either<Failure, List<Movie>>> getActorsMovieCredits(
     ActorsParameters parameters,
+  );
+  Future<Either<Failure, List<Movie>>> getSearchMovie(
+    SearchParameters parameters,
   );
 }

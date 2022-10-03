@@ -5,6 +5,7 @@ import 'package:film/movie/domain/useCase/get_actor_movie_credits.dart';
 import 'package:film/movie/domain/useCase/get_actors_movie.dart';
 import 'package:film/movie/domain/useCase/get_popular_movie.dart';
 import 'package:film/movie/domain/useCase/get_recommendations_movie.dart';
+import 'package:film/movie/domain/useCase/get_search_movie_use_case.dart';
 import 'package:film/movie/domain/useCase/get_toprated_movie.dart';
 import 'package:film/movie/domain/useCase/get_upcoming_movie.dart';
 import 'package:film/movie/domain/useCase/movie_details_use_case.dart';
@@ -21,7 +22,7 @@ final sl = GetIt.instance;
 class ServicesLocator {
   void init() {
     // to bloc
-    sl.registerFactory(() => MovieBloc(sl(), sl(), sl(), sl()));
+    sl.registerFactory(() => MovieBloc(sl(), sl(), sl(), sl(), sl()));
     sl.registerFactory(() => MovieDetailsBloc(sl(), sl(), sl()));
     sl.registerFactory(() => ActorDetailsBloc(sl(), sl()));
     // use case
@@ -35,6 +36,7 @@ class ServicesLocator {
         () => GetActorsMovieUseCase(baseMovieRepository: sl()));
     sl.registerLazySingleton(() => GetActorDetailsUseCase(sl()));
     sl.registerLazySingleton(() => GetActorMovieCreditsUseCase(sl()));
+    sl.registerLazySingleton(() => GetSearchMovieUseCase(sl()));
     // repository
     sl.registerLazySingleton<BaseMovieRepository>(
       () => MovieRepository(baseRemoteMovieDataSource: sl()),

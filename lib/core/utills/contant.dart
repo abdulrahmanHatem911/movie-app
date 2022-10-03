@@ -29,7 +29,9 @@ class AppConstant {
       "$BASE_URL/person/$actorId?api_key=$API_KEY&&language=en-US";
   static String getActorMovieCreditsPath(int actorId) =>
       "$BASE_URL/person/$actorId/movie_credits?api_key=$API_KEY&&language=en-US";
-
+  static String getSearchMoviePath(String query) =>
+      "$BASE_URL/search/movie?api_key=$API_KEY&query=$query";
+  //  https://api.themoviedb.org/3/search/movie?
   static const String baseImageUrl = "https://image.tmdb.org/t/p/w500";
 
   static String imageUrl(String path) => '$baseImageUrl$path';

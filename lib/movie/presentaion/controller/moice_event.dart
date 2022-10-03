@@ -20,3 +20,10 @@ class ChangePageEvent extends MoviesEvent {
   @override
   List<Object> get props => [currentPage];
 }
+
+class GetSearchMovieEvent extends MoviesEvent {
+  final String query;
+  GetSearchMovieEvent(this.query);
+  @override
+  List<Object> get props => [query];
+}

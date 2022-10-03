@@ -132,10 +132,9 @@ class ActorDetailsScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 20.0),
                         Text(
-                          state.actorDetails!.biography,
-                          // maxLines: 6,
-                          // textWidthBasis: TextWidthBasis.longestLine,
-                          // overflow: TextOverflow.ellipsis,
+                          state.actorDetails!.biography ?? '',
+                          maxLines: 6,
+                          overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
                             fontSize: 14.0,
                             fontWeight: FontWeight.w400,

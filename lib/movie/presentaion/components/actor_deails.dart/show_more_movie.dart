@@ -22,31 +22,54 @@ class ShowMoreMovie extends StatelessWidget {
               return FadeInUp(
                 from: 20,
                 duration: const Duration(milliseconds: 500),
-                child: ClipRRect(
-                  borderRadius: const BorderRadius.all(Radius.circular(4.0)),
-                  child: CachedNetworkImage(
-                    imageUrl: AppConstant.imageUrl(
-                        recommendation.backdropPath == null ||
-                                recommendation.backdropPath.isEmpty
-                            ? '/wPLXqJMbGH5F4ralorSiRQJwDp3.jpg'
-                            : recommendation.posterPath),
-                    placeholder: (context, url) => Shimmer.fromColors(
-                      baseColor: Colors.grey[850]!,
-                      highlightColor: Colors.grey[800]!,
-                      child: Container(
-                        height: 170.0,
-                        width: 120.0,
-                        decoration: BoxDecoration(
-                          color: Colors.black,
-                          borderRadius: BorderRadius.circular(8.0),
+                child: Stack(
+                  children: [
+                    ClipRRect(
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(4.0)),
+                      child: CachedNetworkImage(
+                        imageUrl: AppConstant.imageUrl(
+                            recommendation.backdropPath == null ||
+                                    recommendation.backdropPath.isEmpty
+                                ? '/wPLXqJMbGH5F4ralorSiRQJwDp3.jpg'
+                                : recommendation.posterPath),
+                        placeholder: (context, url) => Shimmer.fromColors(
+                          baseColor: Colors.grey[850]!,
+                          highlightColor: Colors.grey[800]!,
+                          child: Container(
+                            height: 170.0,
+                            width: 120.0,
+                            decoration: BoxDecoration(
+                              color: Colors.black,
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                          ),
                         ),
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
+                        height: 180.0,
+                        fit: BoxFit.cover,
                       ),
                     ),
-                    errorWidget: (context, url, error) =>
-                        const Icon(Icons.error),
-                    height: 180.0,
-                    fit: BoxFit.cover,
-                  ),
+                    Positioned(
+                      top: 10.0,
+                      left: 10.0,
+                      child: Container(
+                        height: 20.0,
+                        width: 30.0,
+                        decoration: BoxDecoration(
+                          color: Colors.red.shade500.withOpacity(0.9),
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(4.0),
+                          ),
+                        ),
+                        child: Center(
+                            child: Text('${recommendation.voteAverage.toInt()}',
+                                style: const TextStyle(
+                                    color: Colors.white, fontSize: 14.0))),
+                      ),
+                    ),
+                  ],
                 ),
               );
             },
