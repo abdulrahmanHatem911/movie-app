@@ -10,6 +10,7 @@ import 'package:film/movie/domain/entity/recommendations_movie.dart';
 import 'package:film/movie/domain/repository/base_movie_repository.dart';
 import 'package:film/movie/domain/useCase/get_actors_movie.dart';
 import 'package:film/movie/domain/useCase/get_recommendations_movie.dart';
+import 'package:film/movie/domain/useCase/get_search_movie_use_case.dart';
 import 'package:film/movie/domain/useCase/movie_details_use_case.dart';
 
 class MovieRepository extends BaseMovieRepository {
@@ -121,6 +122,18 @@ class MovieRepository extends BaseMovieRepository {
       ActorsParameters parameters) async {
     final result =
         await baseRemoteMovieDataSource.getActorMovieCredits(parameters);
+    try {
+      return Right(result);
+    } on ServerException catch (failure) {
+      return left(
+          ServerFailure(message: failure.errorMessageModel.statusMessage));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Movie>>> getSearchMovie(
+      SearchParameters parameters) async {
+    final result = await baseRemoteMovieDataSource.getSearchMovie(parameters);
     try {
       return Right(result);
     } on ServerException catch (failure) {

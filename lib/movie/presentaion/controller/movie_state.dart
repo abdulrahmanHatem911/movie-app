@@ -19,7 +19,10 @@ class MovieState extends Equatable {
   final RequestState upcomingState;
   final String upcomingMessage;
   final List<Movie> upcomingMovies;
-  //
+  //search movies
+  final RequestState searchState;
+  final String searchMessage;
+  final List<Movie> searchMovies;
   final int currantIndex;
   const MovieState({
     this.nowPlayingState = RequestState.loading,
@@ -35,6 +38,9 @@ class MovieState extends Equatable {
     this.upcomingMessage = '',
     this.upcomingMovies = const [],
     this.currantIndex = 0,
+    this.searchState = RequestState.loading,
+    this.searchMessage = '',
+    this.searchMovies = const [],
   });
   MovieState copyWith({
     RequestState? nowPlayingState,
@@ -53,6 +59,10 @@ class MovieState extends Equatable {
     String? upcomingMessage,
     List<Movie>? upcomingMovies,
     int? currantIndex,
+    //search movies
+    RequestState? searchState,
+    String? searchMessage,
+    List<Movie>? searchMovies,
   }) {
     return MovieState(
       nowPlayingState: nowPlayingState ?? this.nowPlayingState,
@@ -68,6 +78,9 @@ class MovieState extends Equatable {
       upcomingMessage: upcomingMessage ?? this.upcomingMessage,
       upcomingMovies: upcomingMovies ?? this.upcomingMovies,
       currantIndex: currantIndex ?? this.currantIndex,
+      searchState: searchState ?? this.searchState,
+      searchMessage: searchMessage ?? this.searchMessage,
+      searchMovies: searchMovies ?? this.searchMovies,
     );
   }
 
@@ -86,5 +99,8 @@ class MovieState extends Equatable {
         upcomingMessage,
         upcomingMovies,
         currantIndex,
+        searchState,
+        searchMessage,
+        searchMovies,
       ];
 }

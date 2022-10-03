@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:film/core/utills/base_use_case.dart';
 import 'package:film/core/utills/contant.dart';
 import 'package:film/movie/data/models/movie_model.dart';
+import 'package:film/movie/domain/useCase/get_search_movie_use_case.dart';
 import 'package:film/movie/domain/useCase/get_upcoming_movie.dart';
 import 'package:film/movie/domain/useCase/movie_details_use_case.dart';
 import 'package:film/movie/presentaion/controller/moice_event.dart';
@@ -22,6 +23,7 @@ class MovieBloc extends Bloc<MoviesEvent, MovieState> {
   final GetPopularMovie getPopularMovie;
   final GetTopRatedMovie getTopRatedMovie;
   final GetUpcomingMovieUseCase getUpcomingMovieUseCase;
+  final GetSearchMovieUseCase getSearchMovieUseCase;
   List<Movie> getRefreshPopularList = [];
   int refreshPopularMoviePage = 1;
   List<Movie> getRefreshTopRatedList = [];
@@ -32,12 +34,14 @@ class MovieBloc extends Bloc<MoviesEvent, MovieState> {
     this.getPopularMovie,
     this.getTopRatedMovie,
     this.getUpcomingMovieUseCase,
+    this.getSearchMovieUseCase,
   ) : super(const MovieState()) {
     on<GetNewPlayingMoviesEvent>(_getNowPlayingMovies);
     on<GetPopularMoviesEvent>(_getPopularMovies);
     on<GetTopRatedMoviesEvent>(_getTopRatedMovies);
     on<GetUpcomingMoviesEvent>(_getUpcomingMovie);
     on<ChangePageEvent>(_changePage);
+    on<GetSearchMovieEvent>(_getSearchMovie);
   }
 
   FutureOr<void> _getNowPlayingMovies(
@@ -125,5 +129,24 @@ class MovieBloc extends Bloc<MoviesEvent, MovieState> {
         currantIndex: index,
       ),
     );
+  }
+
+  FutureOr<void> _getSearchMovie(
+      GetSearchMovieEvent event, Emitter<MovieState> emit) async {
+    emit(state.copyWith(searchState: RequestState.loading));
+    final _result =
+        await getSearchMovieUseCase.call(SearchParameters(event.query));
+    _result.fold(
+        (l) => emit(state.copyWith(
+              searchState: RequestState.error,
+              searchMessage: l.message,
+            )), (r) {
+      emit(
+        state.copyWith(
+          searchState: RequestState.loaded,
+          searchMovies: r,
+        ),
+      );
+    });
   }
 }
