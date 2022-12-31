@@ -1,8 +1,9 @@
-import 'package:film/core/globel/theme/theme_data/dark_theme_data.dart';
-import 'package:film/core/services/services_locator.dart';
-import 'package:film/core/utills/app_string.dart';
-import 'package:film/movie/presentaion/screens/movies_screen.dart';
 import 'package:flutter/material.dart';
+
+import 'core/globel/theme/theme_data/dark_theme_data.dart';
+import 'core/services/services_locator.dart';
+import 'core/utills/app_string.dart';
+import 'movie/presentaion/screens/movies_screen.dart';
 
 void main() {
   ServicesLocator().init();

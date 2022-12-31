@@ -1,7 +1,7 @@
-import 'package:film/core/services/services_locator.dart';
-import 'package:film/movie/presentaion/controller/moice_event.dart';
-import 'package:film/movie/presentaion/controller/movie_bloc.dart';
-import 'package:film/movie/presentaion/controller/movie_state.dart';
+import '../../../core/services/services_locator.dart';
+import '../controller/moice_event.dart';
+import '../controller/movie_bloc.dart';
+import '../controller/movie_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

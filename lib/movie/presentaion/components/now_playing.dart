@@ -1,10 +1,10 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:film/core/widgets/loading_widget.dart';
-import 'package:film/movie/presentaion/controller/movie_bloc.dart';
-import 'package:film/movie/presentaion/controller/movie_state.dart';
-import 'package:film/movie/presentaion/screens/movie_detail_screen.dart';
+import '../../../core/widgets/loading_widget.dart';
+import '../controller/movie_bloc.dart';
+import '../controller/movie_state.dart';
+import '../screens/movie_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

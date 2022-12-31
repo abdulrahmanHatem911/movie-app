@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:film/core/utills/enum.dart';
-import 'package:film/movie/domain/entity/actor_details.dart';
-import 'package:film/movie/domain/useCase/get_actors_details_use_case.dart';
+import '../../../../core/utills/enum.dart';
+import '../../../domain/entity/actor_details.dart';
+import '../../../domain/useCase/get_actors_details_use_case.dart';
 
 import '../../../domain/entity/movie.dart';
 import '../../../domain/useCase/get_actor_movie_credits.dart';

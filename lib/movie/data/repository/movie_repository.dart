@@ -1,17 +1,18 @@
 import 'package:dartz/dartz.dart';
-import 'package:film/core/error/exeption.dart';
-import 'package:film/core/error/failer.dart';
-import 'package:film/movie/data/dataSource/remote/remote_movie_dataSource.dart';
-import 'package:film/movie/domain/entity/actor_details.dart';
-import 'package:film/movie/domain/entity/actors.dart';
-import 'package:film/movie/domain/entity/movie.dart';
-import 'package:film/movie/domain/entity/movie_details.dart';
-import 'package:film/movie/domain/entity/recommendations_movie.dart';
-import 'package:film/movie/domain/repository/base_movie_repository.dart';
-import 'package:film/movie/domain/useCase/get_actors_movie.dart';
-import 'package:film/movie/domain/useCase/get_recommendations_movie.dart';
-import 'package:film/movie/domain/useCase/get_search_movie_use_case.dart';
-import 'package:film/movie/domain/useCase/movie_details_use_case.dart';
+import '../../../core/error/exeption.dart';
+import '../../../core/error/failer.dart';
+import '../dataSource/remote/remote_movie_dataSource.dart';
+import '../../domain/entity/actor_details.dart';
+import '../../domain/entity/actors.dart';
+import '../../domain/entity/movie.dart';
+import '../../domain/entity/movie_details.dart';
+import '../../domain/entity/movie_vedio.dart';
+import '../../domain/entity/recommendations_movie.dart';
+import '../../domain/repository/base_movie_repository.dart';
+import '../../domain/useCase/get_actors_movie.dart';
+import '../../domain/useCase/get_recommendations_movie.dart';
+import '../../domain/useCase/get_search_movie_use_case.dart';
+import '../../domain/useCase/movie_details_use_case.dart';
 
 class MovieRepository extends BaseMovieRepository {
   final BaseRemoteMovieDataSource baseRemoteMovieDataSource;
@@ -134,6 +135,18 @@ class MovieRepository extends BaseMovieRepository {
   Future<Either<Failure, List<Movie>>> getSearchMovie(
       SearchParameters parameters) async {
     final result = await baseRemoteMovieDataSource.getSearchMovie(parameters);
+    try {
+      return Right(result);
+    } on ServerException catch (failure) {
+      return left(
+          ServerFailure(message: failure.errorMessageModel.statusMessage));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<MovieVideo>>> getMovieVideo(
+      MovieDetailsParameters parameters) async {
+    final result = await baseRemoteMovieDataSource.getMovieVideos(parameters);
     try {
       return Right(result);
     } on ServerException catch (failure) {

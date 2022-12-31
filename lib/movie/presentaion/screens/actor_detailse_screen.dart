@@ -1,7 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:film/core/services/services_locator.dart';
-import 'package:film/core/widgets/loading_widget.dart';
+import '../../../core/services/services_locator.dart';
+import '../../../core/widgets/loading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -132,7 +132,7 @@ class ActorDetailsScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 20.0),
                         Text(
-                          state.actorDetails!.biography ?? '',
+                          state.actorDetails!.biography,
                           maxLines: 6,
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(

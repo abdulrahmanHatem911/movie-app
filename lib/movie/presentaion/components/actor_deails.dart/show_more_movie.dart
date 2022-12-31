@@ -1,12 +1,13 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:film/movie/presentaion/controller/actor_details/actor_details_bloc.dart';
+import '../../controller/actor_details/actor_details_bloc.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../../core/utills/contant.dart';
+import '../../screens/movie_detail_screen.dart';
 
 class ShowMoreMovie extends StatelessWidget {
   const ShowMoreMovie({super.key});
@@ -24,31 +25,39 @@ class ShowMoreMovie extends StatelessWidget {
                 duration: const Duration(milliseconds: 500),
                 child: Stack(
                   children: [
-                    ClipRRect(
-                      borderRadius:
-                          const BorderRadius.all(Radius.circular(4.0)),
-                      child: CachedNetworkImage(
-                        imageUrl: AppConstant.imageUrl(
-                            recommendation.backdropPath == null ||
-                                    recommendation.backdropPath.isEmpty
-                                ? '/wPLXqJMbGH5F4ralorSiRQJwDp3.jpg'
-                                : recommendation.posterPath),
-                        placeholder: (context, url) => Shimmer.fromColors(
-                          baseColor: Colors.grey[850]!,
-                          highlightColor: Colors.grey[800]!,
-                          child: Container(
-                            height: 170.0,
-                            width: 120.0,
-                            decoration: BoxDecoration(
-                              color: Colors.black,
-                              borderRadius: BorderRadius.circular(8.0),
+                    InkWell(
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MovieDetailScreen(
+                                    id: recommendation.id,
+                                  ))),
+                      child: ClipRRect(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(4.0)),
+                        child: CachedNetworkImage(
+                          imageUrl: AppConstant.imageUrl(
+                              recommendation.posterPath == null ||
+                                      recommendation.posterPath.isEmpty
+                                  ? '/wPLXqJMbGH5F4ralorSiRQJwDp3.jpg'
+                                  : recommendation.posterPath),
+                          placeholder: (context, url) => Shimmer.fromColors(
+                            baseColor: Colors.grey[850]!,
+                            highlightColor: Colors.grey[800]!,
+                            child: Container(
+                              height: 170.0,
+                              width: 120.0,
+                              decoration: BoxDecoration(
+                                color: Colors.black,
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
                             ),
                           ),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
+                          height: 180.0,
+                          fit: BoxFit.cover,
                         ),
-                        errorWidget: (context, url, error) =>
-                            const Icon(Icons.error),
-                        height: 180.0,
-                        fit: BoxFit.cover,
                       ),
                     ),
                     Positioned(

@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:film/core/error/failer.dart';
-import 'package:film/core/utills/base_use_case.dart';
-import 'package:film/movie/domain/entity/movie.dart';
-import 'package:film/movie/domain/repository/base_movie_repository.dart';
+import '../../../core/error/failer.dart';
+import '../../../core/utills/base_use_case.dart';
+import '../entity/movie.dart';
+import '../repository/base_movie_repository.dart';
 
 class GetSearchMovieUseCase extends BaseUseCase<List<Movie>, SearchParameters> {
   final BaseMovieRepository baseMovieRepository;

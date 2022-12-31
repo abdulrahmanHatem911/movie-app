@@ -1,4 +1,4 @@
-import 'package:film/movie/domain/entity/actor_details.dart';
+import '../../domain/entity/actor_details.dart';
 
 class ActorDetailsModel extends ActorDetails {
   ActorDetailsModel({

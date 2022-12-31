@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:film/core/error/failer.dart';
-import 'package:film/movie/domain/entity/actors.dart';
+import '../../../core/error/failer.dart';
+import '../entity/actors.dart';
 
 import '../../../core/utills/base_use_case.dart';
 import '../repository/base_movie_repository.dart';
