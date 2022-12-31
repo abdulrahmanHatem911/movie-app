@@ -1,5 +1,5 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:film/movie/presentaion/screens/actor_detailse_screen.dart';
+import '../../screens/actor_detailse_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

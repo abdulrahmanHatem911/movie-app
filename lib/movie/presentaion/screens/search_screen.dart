@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:film/movie/presentaion/controller/movie_bloc.dart';
-import 'package:film/movie/presentaion/controller/movie_state.dart';
+import '../controller/movie_bloc.dart';
+import '../controller/movie_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';

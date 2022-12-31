@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:film/core/utills/contant.dart';
-import 'package:film/core/widgets/loading_widget.dart';
-import 'package:film/movie/presentaion/components/see%20more/popular_see_more.dart';
-import 'package:film/movie/presentaion/components/see%20more/top_rated_see_more.dart';
-import 'package:film/movie/presentaion/controller/movie_bloc.dart';
-import 'package:film/movie/presentaion/controller/movie_state.dart';
+import '../../../core/utills/contant.dart';
+import '../../../core/widgets/loading_widget.dart';
+import '../components/see%20more/popular_see_more.dart';
+import '../components/see%20more/top_rated_see_more.dart';
+import '../controller/movie_bloc.dart';
+import '../controller/movie_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

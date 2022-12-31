@@ -1,4 +1,4 @@
-import 'package:film/core/globel/theme/app_color/dark_app_color.dart';
+import '../app_color/dark_app_color.dart';
 import 'package:flutter/material.dart';
 
 class AppDarkTheme {

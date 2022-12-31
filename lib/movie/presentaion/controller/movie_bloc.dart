@@ -1,14 +1,14 @@
 import 'dart:async';
 
 import 'package:dio/dio.dart';
-import 'package:film/core/utills/base_use_case.dart';
-import 'package:film/core/utills/contant.dart';
-import 'package:film/movie/data/models/movie_model.dart';
-import 'package:film/movie/domain/useCase/get_search_movie_use_case.dart';
-import 'package:film/movie/domain/useCase/get_upcoming_movie.dart';
-import 'package:film/movie/domain/useCase/movie_details_use_case.dart';
-import 'package:film/movie/presentaion/controller/moice_event.dart';
-import 'package:film/movie/presentaion/controller/movie_state.dart';
+import '../../../core/utills/base_use_case.dart';
+import '../../../core/utills/contant.dart';
+import '../../data/models/movie_model.dart';
+import '../../domain/useCase/get_search_movie_use_case.dart';
+import '../../domain/useCase/get_upcoming_movie.dart';
+import '../../domain/useCase/movie_details_use_case.dart';
+import 'moice_event.dart';
+import 'movie_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/utills/enum.dart';

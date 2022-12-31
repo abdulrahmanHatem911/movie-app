@@ -1,13 +1,15 @@
 import 'dart:async';
 
 import 'package:equatable/equatable.dart';
-import 'package:film/core/utills/enum.dart';
-import 'package:film/movie/domain/entity/actors.dart';
-import 'package:film/movie/domain/entity/movie_details.dart';
-import 'package:film/movie/domain/entity/recommendations_movie.dart';
-import 'package:film/movie/domain/useCase/get_actors_movie.dart';
-import 'package:film/movie/domain/useCase/get_recommendations_movie.dart';
-import 'package:film/movie/domain/useCase/movie_details_use_case.dart';
+import '../../../../core/utills/enum.dart';
+import '../../../domain/entity/actors.dart';
+import '../../../domain/entity/movie_details.dart';
+import '../../../domain/entity/movie_vedio.dart';
+import '../../../domain/entity/recommendations_movie.dart';
+import '../../../domain/useCase/get_actors_movie.dart';
+import '../../../domain/useCase/get_movie_video.use_case.dart';
+import '../../../domain/useCase/get_recommendations_movie.dart';
+import '../../../domain/useCase/movie_details_use_case.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'movie_details_event.dart';
@@ -18,14 +20,17 @@ class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
   final GetMovieDetailsUseCase getMovieDetailsUseCase;
   final GetRecommendationMovie getRecommendationMovie;
   final GetActorsMovieUseCase getActorsMovieUseCase;
+  final GetMovieVideoUseCase getMovieVideoUseCase;
   MovieDetailsBloc(
     this.getMovieDetailsUseCase,
     this.getRecommendationMovie,
     this.getActorsMovieUseCase,
+    this.getMovieVideoUseCase,
   ) : super(const MovieDetailsState()) {
     on<GetMovieDetailsEvent>(_getMovieDetails);
     on<GetMovieRecommendationEvent>(_getRecommendations);
     on<GetActorsMovieEvent>(_getActors);
+    on<GetMovieVideosEvent>(_getMovieVideo);
   }
 
   FutureOr<void> _getMovieDetails(
@@ -80,6 +85,24 @@ class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
         state.copyWith(
           actorsState: RequestState.loaded,
           actorsList: r,
+        ),
+      ),
+    );
+  }
+
+  FutureOr<void> _getMovieVideo(
+      GetMovieVideosEvent event, Emitter<MovieDetailsState> emit) async {
+    final result = await getMovieVideoUseCase
+        .call(MovieDetailsParameters(movieId: event.id));
+    result.fold(
+      (l) => emit(state.copyWith(
+        videosState: RequestState.error,
+        videosMessage: l.message,
+      )),
+      (r) => emit(
+        state.copyWith(
+          videosState: RequestState.loaded,
+          videosList: r,
         ),
       ),
     );

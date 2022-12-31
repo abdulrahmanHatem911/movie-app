@@ -1,4 +1,4 @@
-import 'package:film/movie/domain/entity/movie_details.dart';
+import '../../domain/entity/movie_details.dart';
 
 class MovieDetailsModel extends MovieDetails {
   const MovieDetailsModel({
@@ -21,9 +21,9 @@ class MovieDetailsModel extends MovieDetails {
       voteAverage: json['vote_average'].toDouble(),
       backdropPath: json['backdrop_path'],
       releaseDate: json['release_date'],
-      genres: List<GenresModel>.from(json['genres'].map(
-        (x) => GenresModel.fromJason(x),
-      )),
+      genres: List<GenresModel>.from(
+        json['genres'].map((x) => GenresModel.fromJason(x)),
+      ),
     );
   }
 }

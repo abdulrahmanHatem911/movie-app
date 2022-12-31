@@ -1,24 +1,26 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:film/movie/data/models/actors_model.dart';
-import 'package:film/movie/data/models/movie_details_model.dart';
-import 'package:film/movie/data/models/movie_model.dart';
-import 'package:film/movie/data/models/recommendation_model.dart';
-import 'package:film/movie/domain/entity/actor_details.dart';
-import 'package:film/movie/domain/entity/actors.dart';
-import 'package:film/movie/domain/entity/movie_details.dart';
-import 'package:film/movie/domain/entity/recommendations_movie.dart';
-import 'package:film/movie/domain/useCase/get_recommendations_movie.dart';
-import 'package:film/movie/domain/useCase/get_search_movie_use_case.dart';
-import 'package:film/movie/domain/useCase/movie_details_use_case.dart';
+import '../../models/actors_model.dart';
+import '../../models/movie_details_model.dart';
+import '../../models/movie_model.dart';
+import '../../models/recommendation_model.dart';
+import '../../../domain/entity/actor_details.dart';
+import '../../../domain/entity/actors.dart';
+import '../../../domain/entity/movie_details.dart';
+import '../../../domain/entity/recommendations_movie.dart';
+import '../../../domain/useCase/get_recommendations_movie.dart';
+import '../../../domain/useCase/get_search_movie_use_case.dart';
+import '../../../domain/useCase/movie_details_use_case.dart';
 
 import '../../../../core/error/exeption.dart';
 import '../../../../core/network/error_model.dart';
 import '../../../../core/utills/contant.dart';
 import '../../../domain/entity/movie.dart';
+import '../../../domain/entity/movie_vedio.dart';
 import '../../../domain/useCase/get_actors_movie.dart';
 import '../../models/actore_detailes.dart';
+import '../../models/movie_video_model.dart';
 
 abstract class BaseRemoteMovieDataSource {
   Future<List<Movie>> getNowPlayingMovie();
@@ -32,6 +34,7 @@ abstract class BaseRemoteMovieDataSource {
   Future<ActorDetails> getActorDetails(ActorsParameters parameters);
   Future<List<Movie>> getActorMovieCredits(ActorsParameters parameters);
   Future<List<Movie>> getSearchMovie(SearchParameters parameters);
+  Future<List<MovieVideo>> getMovieVideos(MovieDetailsParameters parameters);
 }
 
 class RemoteMovieDataSource extends BaseRemoteMovieDataSource {
@@ -173,6 +176,21 @@ class RemoteMovieDataSource extends BaseRemoteMovieDataSource {
     if (response.statusCode == 200) {
       return List<MovieModel>.from((response.data['results'] as List)
           .map((e) => MovieModel.fromJson(e)));
+    } else {
+      throw ServerException(
+        errorMessageModel: ErrorMessageModel.fromJson(response.data),
+      );
+    }
+  }
+
+  @override
+  Future<List<MovieVideo>> getMovieVideos(
+      MovieDetailsParameters parameters) async {
+    final response = await Dio()
+        .get(AppConstant.getMovieVideoPath(parameters.movieId ?? 760161));
+    if (response.statusCode == 200) {
+      return List<MovieVideoModel>.from((response.data['results'] as List)
+          .map((e) => MovieVideoModel.fromJson(e)));
     } else {
       throw ServerException(
         errorMessageModel: ErrorMessageModel.fromJson(response.data),

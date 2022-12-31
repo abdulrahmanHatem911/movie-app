@@ -1,12 +1,13 @@
 import 'package:dartz/dartz.dart';
-import 'package:film/movie/domain/entity/actor_details.dart';
-import 'package:film/movie/domain/entity/actors.dart';
-import 'package:film/movie/domain/entity/movie.dart';
-import 'package:film/movie/domain/entity/recommendations_movie.dart';
-import 'package:film/movie/domain/useCase/movie_details_use_case.dart';
+import '../entity/actor_details.dart';
+import '../entity/actors.dart';
+import '../entity/movie.dart';
+import '../entity/recommendations_movie.dart';
+import '../useCase/movie_details_use_case.dart';
 
 import '../../../core/error/failer.dart';
 import '../entity/movie_details.dart';
+import '../entity/movie_vedio.dart';
 import '../useCase/get_actors_movie.dart';
 import '../useCase/get_recommendations_movie.dart';
 import '../useCase/get_search_movie_use_case.dart';
@@ -37,5 +38,9 @@ abstract class BaseMovieRepository {
   );
   Future<Either<Failure, List<Movie>>> getSearchMovie(
     SearchParameters parameters,
+  );
+  //get movie video
+  Future<Either<Failure, List<MovieVideo>>> getMovieVideo(
+    MovieDetailsParameters parameters,
   );
 }

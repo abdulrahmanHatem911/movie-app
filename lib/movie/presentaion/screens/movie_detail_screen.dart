@@ -1,8 +1,8 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:film/core/utills/app_string.dart';
-import 'package:film/core/widgets/loading_widget.dart';
-import 'package:film/movie/domain/entity/movie_details.dart';
+import '../../../core/utills/app_string.dart';
+import '../../../core/widgets/loading_widget.dart';
+import '../../domain/entity/movie_details.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,6 +15,7 @@ import '../../../core/utills/dummy.dart';
 import '../../../core/utills/enum.dart';
 import '../../domain/entity/recommendations_movie.dart';
 import '../components/movie details/actors_movie.dart';
+import '../components/movie details/movie_videos_list.dart';
 import '../components/movie details/show_recommendations.dart';
 import '../controller/movie_details/movie_details_bloc.dart';
 
@@ -29,7 +30,8 @@ class MovieDetailScreen extends StatelessWidget {
       create: (context) => sl<MovieDetailsBloc>()
         ..add(GetMovieDetailsEvent(id))
         ..add(GetMovieRecommendationEvent(id))
-        ..add(GetActorsMovieEvent(id)),
+        ..add(GetActorsMovieEvent(id))
+        ..add(GetMovieVideosEvent(id)),
       lazy: false,
       child: const Scaffold(
         body: MovieDetailContent(),
@@ -188,7 +190,28 @@ class MovieDetailContent extends StatelessWidget {
                   ),
                 ),
                 SliverPadding(
-                  padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 24.0),
+                  padding: const EdgeInsets.fromLTRB(16.0, 16.0, 0, 8.0),
+                  sliver: SliverToBoxAdapter(
+                    child: FadeInUp(
+                      from: 20,
+                      duration: const Duration(milliseconds: 500),
+                      child: Text(
+                        'Videos',
+                        style: GoogleFonts.poppins(
+                          color: Colors.white,
+                          fontSize: 19,
+                          fontWeight: FontWeight.w500,
+                          letterSpacing: 0.15,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SliverToBoxAdapter(
+                  child: MovieVideosListComponent(),
+                ),
+                SliverPadding(
+                  padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 24.0),
                   sliver: SliverToBoxAdapter(
                     child: FadeInUp(
                       from: 20,
@@ -205,6 +228,7 @@ class MovieDetailContent extends StatelessWidget {
                     ),
                   ),
                 ),
+
                 SliverToBoxAdapter(
                   child: ActorMovieWidget(),
                 ),

@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
-import 'package:film/core/error/failer.dart';
+import '../../../core/error/failer.dart';
 import 'package:dartz/dartz.dart';
-import 'package:film/core/utills/base_use_case.dart';
-import 'package:film/movie/domain/entity/movie_details.dart';
-import 'package:film/movie/domain/repository/base_movie_repository.dart';
+import '../../../core/utills/base_use_case.dart';
+import '../entity/movie_details.dart';
+import '../repository/base_movie_repository.dart';
 
 class GetMovieDetailsUseCase
     extends BaseUseCase<MovieDetails, MovieDetailsParameters> {
