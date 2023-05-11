@@ -1,19 +1,16 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import '../../../core/utills/app_string.dart';
-import '../../../core/widgets/loading_widget.dart';
-import '../../domain/entity/movie_details.dart';
-
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:shimmer/shimmer.dart';
 
 import '../../../core/services/services_locator.dart';
+import '../../../core/utills/app_string.dart';
 import '../../../core/utills/contant.dart';
-import '../../../core/utills/dummy.dart';
 import '../../../core/utills/enum.dart';
-import '../../domain/entity/recommendations_movie.dart';
+import '../../../core/widgets/loading_widget.dart';
+import '../../domain/entity/movie_details.dart';
 import '../components/movie details/actors_movie.dart';
 import '../components/movie details/movie_videos_list.dart';
 import '../components/movie details/show_recommendations.dart';
@@ -47,6 +44,7 @@ class MovieDetailContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Offset _tapPosition = Offset.zero;
     return BlocBuilder<MovieDetailsBloc, MovieDetailsState>(
       builder: (context, state) {
         switch (state.movieDetailsState) {
@@ -166,12 +164,67 @@ class MovieDetailContent extends StatelessWidget {
                             ],
                           ),
                           const SizedBox(height: 20.0),
-                          Text(
-                            state.movieDetails!.overview,
-                            style: const TextStyle(
-                              fontSize: 14.0,
-                              fontWeight: FontWeight.w400,
-                              letterSpacing: 1.2,
+                          GestureDetector(
+                            onLongPress: () {
+                              // Show custom context menu
+                              final RenderBox overlay = Overlay.of(context)
+                                  .context
+                                  .findRenderObject() as RenderBox;
+                              showMenu(
+                                context: context,
+                                position: RelativeRect.fromRect(
+                                  _tapPosition &
+                                      const Size(40,
+                                          40), // smaller rect, the touch area
+                                  Offset.zero & overlay.size,
+                                ),
+                                items: [
+                                  PopupMenuItem(
+                                    child: Text('Copy'),
+                                    value: 'copy',
+                                  ),
+                                  PopupMenuItem(
+                                    child: Text('Select All'),
+                                    value: 'select-all',
+                                  ),
+                                  PopupMenuItem(
+                                    child: Text('Delete'),
+                                    value: 'delete',
+                                  ),
+                                  PopupMenuItem(
+                                    child: Text('Open with...'),
+                                    value: 'open-with',
+                                  )
+                                ],
+                              ).then<void>((Object? newValue) {
+                                // Handle menu selection
+                                if (newValue == null) {
+                                  return;
+                                }
+                                if (newValue == 'copy') {
+                                  Clipboard.setData(
+                                    ClipboardData(
+                                      text: state.movieDetails!.overview,
+                                    ),
+                                  );
+                                }
+                                if (newValue == 'select-all') {
+                                  // Select all text
+                                  // ...
+                                }
+                              });
+                            },
+                            child: SelectableText(
+                              state.movieDetails!.overview,
+                              style: const TextStyle(
+                                fontSize: 14.0,
+                                fontWeight: FontWeight.w400,
+                                letterSpacing: 1.2,
+                              ),
+                              showCursor: true,
+                              cursorWidth: 2,
+                              cursorColor: Colors.red,
+                              cursorRadius: Radius.circular(5),
                             ),
                           ),
                           const SizedBox(height: 8.0),

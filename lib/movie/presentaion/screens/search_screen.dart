@@ -1,15 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import '../controller/movie_bloc.dart';
-import '../controller/movie_state.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/services/services_locator.dart';
 import '../../../core/utills/contant.dart';
 import '../../../core/utills/enum.dart';
 import '../controller/moice_event.dart';
+import '../controller/movie_bloc.dart';
+import '../controller/movie_state.dart';
 import 'movie_detail_screen.dart';
 
 TextEditingController _searchController = TextEditingController();
@@ -107,9 +105,7 @@ class SearchScreen extends StatelessWidget {
                                                   BorderRadius.circular(8.0),
                                               child: CachedNetworkImage(
                                                 imageUrl: AppConstant.imageUrl(
-                                                  movie.posterPath == null ||
-                                                          movie.posterPath
-                                                              .isEmpty
+                                                  movie.posterPath.isEmpty
                                                       ? '/6aU58nbrPXECyVEfa8i4i5iW2OG.jpg'
                                                       : movie.posterPath,
                                                 ),
@@ -127,44 +123,21 @@ class SearchScreen extends StatelessWidget {
                                             children: [
                                               Text(
                                                 movie.title,
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
                                                 style: const TextStyle(
-                                                  fontSize: 18.0,
+                                                  fontSize: 16.0,
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
                                               const SizedBox(height: 8.0),
                                               Row(
                                                 children: [
-                                                  Container(
-                                                    padding: const EdgeInsets
-                                                        .symmetric(
-                                                      vertical: 2.0,
-                                                      horizontal: 8.0,
-                                                    ),
-                                                    decoration: BoxDecoration(
-                                                      color: Colors.red[400],
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              4.0),
-                                                    ),
-                                                    child: Text(
-                                                      movie.releaseDate
-                                                          .split('-')[0],
-                                                      style: const TextStyle(
-                                                        fontSize: 16.0,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  const SizedBox(width: 10.0),
                                                   Row(
                                                     children: [
-                                                      const Icon(
-                                                        Icons.star,
-                                                        color: Colors.amber,
-                                                        size: 20.0,
-                                                      ),
+                                                      const Icon(Icons.star,
+                                                          color: Colors.amber,
+                                                          size: 16.0),
                                                       const SizedBox(
                                                           width: 4.0),
                                                       Text(
@@ -190,6 +163,29 @@ class SearchScreen extends StatelessWidget {
                                                       ),
                                                     ],
                                                   ),
+                                                  const SizedBox(width: 10.0),
+                                                  Container(
+                                                    padding: const EdgeInsets
+                                                        .symmetric(
+                                                      vertical: 2.0,
+                                                      horizontal: 8.0,
+                                                    ),
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.red[400],
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              4.0),
+                                                    ),
+                                                    child: Text(
+                                                      movie.releaseDate
+                                                          .split('-')[0],
+                                                      style: const TextStyle(
+                                                        fontSize: 14.0,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                      ),
+                                                    ),
+                                                  ),
                                                 ],
                                               ),
                                               const SizedBox(height: 8.0),
@@ -199,6 +195,7 @@ class SearchScreen extends StatelessWidget {
                                                 overflow: TextOverflow.ellipsis,
                                                 style: TextStyle(
                                                   fontSize: 14.0,
+                                                  fontWeight: FontWeight.w400,
                                                   color: Colors.grey.shade300,
                                                 ),
                                               ),

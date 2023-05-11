@@ -12,13 +12,18 @@ class ActorDetailsModel extends ActorDetails {
   });
   factory ActorDetailsModel.fromJson(Map<String, dynamic> json) {
     return ActorDetailsModel(
-      id: json['id'],
-      name: json['name'],
-      profilePath: json['profile_path'],
-      character: json['known_for_department'],
-      birthday: json['birthday'],
-      placeOfBirth: json['place_of_birth'],
-      biography: json['biography'],
+      id: json['id'] == null ? 0 : json['id'],
+      name: json['name'] == null ? '' : json['name'],
+      profilePath: json['profile_path'] == null
+          ? '/5M7oN3sznp99hWYQ9sX0xheswWX.jpg'
+          : json['profile_path'],
+      character: json['known_for_department'] == null
+          ? ''
+          : json['known_for_department'],
+      birthday: json['birthday'] == null ? '' : json['birthday'],
+      placeOfBirth:
+          json['place_of_birth'] == null ? '' : json['place_of_birth'],
+      biography: json['biography'] == null ? '' : json['biography'],
     );
   }
 }

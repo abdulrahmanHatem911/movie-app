@@ -9,10 +9,10 @@ class MovieVideoModel extends MovieVideo {
   });
   factory MovieVideoModel.fromJson(Map<String, dynamic> json) {
     return MovieVideoModel(
-      id: json['id'],
-      key: json['key'],
-      name: json['name'],
-      site: json['site'],
+      id: json['id'] == null ? 0 : json['id'],
+      key: json['key'] == null ? '' : json['key'],
+      name: json['name'] == null ? '' : json['name'],
+      site: json['site'] == null ? '' : json['site'],
     );
   }
 }
