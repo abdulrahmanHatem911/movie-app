@@ -1,22 +1,18 @@
 import 'dart:async';
 
-import 'package:dio/dio.dart';
-import '../../../core/utills/base_use_case.dart';
-import '../../../core/utills/contant.dart';
-import '../../data/models/movie_model.dart';
-import '../../domain/useCase/get_search_movie_use_case.dart';
-import '../../domain/useCase/get_upcoming_movie.dart';
-import '../../domain/useCase/movie_details_use_case.dart';
-import 'moice_event.dart';
-import 'movie_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../core/utills/base_use_case.dart';
 import '../../../core/utills/enum.dart';
 import '../../domain/entity/movie.dart';
 import '../../domain/useCase/get_now_playing_movie.dart';
 import '../../domain/useCase/get_popular_movie.dart';
+import '../../domain/useCase/get_search_movie_use_case.dart';
 import '../../domain/useCase/get_toprated_movie.dart';
-import '../screens/movies_screen.dart';
+import '../../domain/useCase/get_upcoming_movie.dart';
+import '../../domain/useCase/movie_details_use_case.dart';
+import 'moice_event.dart';
+import 'movie_state.dart';
 
 class MovieBloc extends Bloc<MoviesEvent, MovieState> {
   final GetNowPlayingMovie getNowPlayingMovie;

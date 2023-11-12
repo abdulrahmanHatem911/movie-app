@@ -6,8 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/services/services_locator.dart';
+import '../../../core/utills/api_keys.dart';
 import '../../../core/utills/app_string.dart';
-import '../../../core/utills/contant.dart';
 import '../../../core/utills/enum.dart';
 import '../../../core/widgets/loading_widget.dart';
 import '../../domain/entity/movie_details.dart';

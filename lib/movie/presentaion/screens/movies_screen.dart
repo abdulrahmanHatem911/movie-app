@@ -1,24 +1,18 @@
-import 'package:animate_do/animate_do.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 import '../../../core/services/services_locator.dart';
 import '../../../core/utills/app_string.dart';
 import '../components/bottom_navigation.dart';
 import '../components/now_playing.dart';
 import '../components/popular_movie.dart';
+import '../components/toprated_movie.dart';
 import '../components/upcoming_movie.dart';
+import '../controller/moice_event.dart';
 import '../controller/movie_bloc.dart';
 import 'search_screen.dart';
 import 'see_more_movie.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:shimmer/shimmer.dart';
-
-import '../../../core/utills/contant.dart';
-import '../../../core/utills/dummy.dart';
-import '../components/toprated_movie.dart';
-import '../controller/moice_event.dart';
 
 class MainMoviesScreen extends StatelessWidget {
   const MainMoviesScreen({Key? key}) : super(key: key);

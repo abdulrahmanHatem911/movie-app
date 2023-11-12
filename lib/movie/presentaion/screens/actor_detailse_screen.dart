@@ -1,15 +1,14 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import '../../../core/services/services_locator.dart';
-import '../../../core/widgets/loading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../core/utills/contant.dart';
+import '../../../core/services/services_locator.dart';
+import '../../../core/utills/api_keys.dart';
 import '../../../core/utills/enum.dart';
+import '../../../core/widgets/loading_widget.dart';
 import '../components/actor_deails.dart/show_more_movie.dart';
-import '../components/movie details/show_recommendations.dart';
 import '../controller/actor_details/actor_details_bloc.dart';
 
 class ActorDetailsScreen extends StatelessWidget {
