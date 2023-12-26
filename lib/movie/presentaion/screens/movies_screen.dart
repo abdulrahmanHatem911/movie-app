@@ -130,7 +130,7 @@ class MainMoviesScreen extends StatelessWidget {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => const SeeMoreMovie(
-                              title: 'top rated',
+                              title: 'top_rated',
                             ),
                           ),
                         );

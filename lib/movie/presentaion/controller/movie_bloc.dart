@@ -24,6 +24,8 @@ class MovieBloc extends Bloc<MoviesEvent, MovieState> {
   int refreshPopularMoviePage = 1;
   List<Movie> getRefreshTopRatedList = [];
   int refreshTopRatedMoviePage = 1;
+  List<Movie> getRefreshUpcomingList = [];
+  int refreshUpcomingMoviePage = 1;
   int index = 0;
   MovieBloc(
     this.getNowPlayingMovie,
@@ -58,11 +60,9 @@ class MovieBloc extends Bloc<MoviesEvent, MovieState> {
   }
 
   FutureOr<void> _getPopularMovies(
-    GetPopularMoviesEvent event,
-    Emitter<MovieState> emit,
-  ) async {
+      GetPopularMoviesEvent event, Emitter<MovieState> emit) async {
     final result = await getPopularMovie
-        .call(MovieDetailsParameters(page: refreshPopularMoviePage++));
+        .call(MovieDetailsParameters(page: refreshPopularMoviePage));
 
     result.fold(
         (l) => emit(state.copyWith(
@@ -70,7 +70,7 @@ class MovieBloc extends Bloc<MoviesEvent, MovieState> {
               popularMessage: l.message,
             )), (r) {
       getRefreshPopularList = getRefreshPopularList + r;
-
+      print("📍 length od the popule list is ${getRefreshPopularList.length}");
       emit(
         state.copyWith(
           popularState: RequestState.loaded,
@@ -78,25 +78,29 @@ class MovieBloc extends Bloc<MoviesEvent, MovieState> {
         ),
       );
     });
+    refreshPopularMoviePage++;
   }
 
 //
   FutureOr<void> _getTopRatedMovies(
-    GetTopRatedMoviesEvent event,
-    Emitter<MovieState> emit,
-  ) async {
+      GetTopRatedMoviesEvent event, Emitter<MovieState> emit) async {
     final result = await getTopRatedMovie.call(
-      MovieDetailsParameters(page: refreshTopRatedMoviePage++),
+      MovieDetailsParameters(page: refreshTopRatedMoviePage),
     );
     result.fold(
-      (l) => emit(state.copyWith(
-        topRatedState: RequestState.error,
-        topRatedMessage: l.message,
-      )),
-      (r) => emit(
-        state.copyWith(topRatedState: RequestState.loaded, topRatedMovies: r),
-      ),
-    );
+        (l) => emit(state.copyWith(
+              topRatedState: RequestState.error,
+              topRatedMessage: l.message,
+            )), (r) {
+      getRefreshTopRatedList = getRefreshTopRatedList + r;
+      emit(
+        state.copyWith(
+          topRatedState: RequestState.loaded,
+          topRatedMovies: getRefreshTopRatedList,
+        ),
+      );
+    });
+    refreshTopRatedMoviePage++;
   }
 
   FutureOr<void> _getUpcomingMovie(

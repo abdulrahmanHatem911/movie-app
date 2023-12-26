@@ -41,7 +41,7 @@ class SeeMoreMovie extends StatelessWidget {
     switch (title) {
       case 'popular':
         return const PopularSeeMoreComponent();
-      case 'top rated':
+      case 'top_rated':
         return const TopRatedSeeMoreComponent();
       case 'upcoming':
         return const UpcomingSeeMoreComponent();
