@@ -68,10 +68,12 @@ class SearchScreen extends StatelessWidget {
                           )
                         : state.searchState == RequestState.loaded
                             ? ListView.separated(
+                                scrollDirection: Axis.vertical,
+                                keyboardDismissBehavior:
+                                    ScrollViewKeyboardDismissBehavior.onDrag,
                                 physics: BouncingScrollPhysics(),
-                                separatorBuilder: (context, index) => SizedBox(
-                                  height: 20,
-                                ),
+                                separatorBuilder: (context, index) =>
+                                    SizedBox(height: 20),
                                 itemCount: state.searchMovies.length,
                                 itemBuilder: (context, index) {
                                   final movie = state.searchMovies[index];
