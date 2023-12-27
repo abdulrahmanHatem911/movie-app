@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/services/services_locator.dart';
-import '../../../core/utills/contant.dart';
+import '../../../core/utills/api_keys.dart';
 import '../../../core/utills/enum.dart';
 import '../controller/moice_event.dart';
 import '../controller/movie_bloc.dart';
@@ -68,10 +68,12 @@ class SearchScreen extends StatelessWidget {
                           )
                         : state.searchState == RequestState.loaded
                             ? ListView.separated(
+                                scrollDirection: Axis.vertical,
+                                keyboardDismissBehavior:
+                                    ScrollViewKeyboardDismissBehavior.onDrag,
                                 physics: BouncingScrollPhysics(),
-                                separatorBuilder: (context, index) => SizedBox(
-                                  height: 20,
-                                ),
+                                separatorBuilder: (context, index) =>
+                                    SizedBox(height: 20),
                                 itemCount: state.searchMovies.length,
                                 itemBuilder: (context, index) {
                                   final movie = state.searchMovies[index];

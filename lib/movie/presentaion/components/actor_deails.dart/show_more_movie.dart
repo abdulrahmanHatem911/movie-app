@@ -1,12 +1,11 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import '../../controller/actor_details/actor_details_bloc.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../../../core/utills/contant.dart';
+import '../../../../core/utills/api_keys.dart';
+import '../../controller/actor_details/actor_details_bloc.dart';
 import '../../screens/movie_detail_screen.dart';
 
 class ShowMoreMovie extends StatelessWidget {
@@ -37,8 +36,7 @@ class ShowMoreMovie extends StatelessWidget {
                             const BorderRadius.all(Radius.circular(4.0)),
                         child: CachedNetworkImage(
                           imageUrl: AppConstant.imageUrl(
-                              recommendation.posterPath == null ||
-                                      recommendation.posterPath.isEmpty
+                              recommendation.posterPath.isEmpty
                                   ? '/wPLXqJMbGH5F4ralorSiRQJwDp3.jpg'
                                   : recommendation.posterPath),
                           placeholder: (context, url) => Shimmer.fromColors(

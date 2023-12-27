@@ -1,17 +1,12 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import '../../../core/utills/contant.dart';
-import '../../../core/widgets/loading_widget.dart';
-import '../components/see%20more/popular_see_more.dart';
-import '../components/see%20more/top_rated_see_more.dart';
-import '../controller/movie_bloc.dart';
-import '../controller/movie_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/services/services_locator.dart';
-import '../../../core/utills/enum.dart';
 import '../components/see more/upcoming_see_more.dart';
+import '../components/see%20more/popular_see_more.dart';
+import '../components/see%20more/top_rated_see_more.dart';
 import '../controller/moice_event.dart';
+import '../controller/movie_bloc.dart';
 
 class SeeMoreMovie extends StatelessWidget {
   final String title;
@@ -46,7 +41,7 @@ class SeeMoreMovie extends StatelessWidget {
     switch (title) {
       case 'popular':
         return const PopularSeeMoreComponent();
-      case 'top rated':
+      case 'top_rated':
         return const TopRatedSeeMoreComponent();
       case 'upcoming':
         return const UpcomingSeeMoreComponent();

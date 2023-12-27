@@ -1,15 +1,13 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import '../../../core/widgets/loading_widget.dart';
-import '../controller/movie_bloc.dart';
-import '../controller/movie_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../../core/utills/contant.dart';
-import '../../../core/utills/dummy.dart';
+import '../../../core/utills/api_keys.dart';
 import '../../../core/utills/enum.dart';
+import '../controller/movie_bloc.dart';
+import '../controller/movie_state.dart';
 import '../screens/movie_detail_screen.dart';
 
 class TopratedMovie extends StatelessWidget {

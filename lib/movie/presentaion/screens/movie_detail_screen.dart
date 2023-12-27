@@ -1,18 +1,18 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:film/movie/presentaion/screens/wach_movie_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/services/services_locator.dart';
+import '../../../core/utills/api_keys.dart';
 import '../../../core/utills/app_string.dart';
-import '../../../core/utills/contant.dart';
 import '../../../core/utills/enum.dart';
 import '../../../core/widgets/loading_widget.dart';
 import '../../domain/entity/movie_details.dart';
 import '../components/movie details/actors_movie.dart';
-import '../components/movie details/movie_videos_list.dart';
 import '../components/movie details/show_recommendations.dart';
 import '../controller/movie_details/movie_details_bloc.dart';
 
@@ -261,8 +261,53 @@ class MovieDetailContent extends StatelessWidget {
                   ),
                 ),
                 SliverToBoxAdapter(
-                  child: MovieVideosListComponent(),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.grey[800],
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                            ),
+                            onPressed: () {},
+                            child: Text('Trailers',
+                                style: TextStyle(color: Colors.white)),
+                          ),
+                        ),
+                        SizedBox(width: 10),
+                        Expanded(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.grey[800],
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => WatchMoviesView(
+                                    movieID: state.movieDetails!.id.toString(),
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Text('Watch Now!',
+                                style: TextStyle(color: Colors.white)),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
+                // SliverToBoxAdapter(
+                //   child: MovieVideosListComponent(),
+                // ),
                 SliverPadding(
                   padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 24.0),
                   sliver: SliverToBoxAdapter(

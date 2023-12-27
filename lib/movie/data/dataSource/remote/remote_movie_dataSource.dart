@@ -1,26 +1,24 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
-import '../../models/actors_model.dart';
-import '../../models/movie_details_model.dart';
-import '../../models/movie_model.dart';
-import '../../models/recommendation_model.dart';
-import '../../../domain/entity/actor_details.dart';
-import '../../../domain/entity/actors.dart';
-import '../../../domain/entity/movie_details.dart';
-import '../../../domain/entity/recommendations_movie.dart';
-import '../../../domain/useCase/get_recommendations_movie.dart';
-import '../../../domain/useCase/get_search_movie_use_case.dart';
-import '../../../domain/useCase/movie_details_use_case.dart';
 
 import '../../../../core/error/exeption.dart';
 import '../../../../core/network/error_model.dart';
-import '../../../../core/utills/contant.dart';
+import '../../../../core/utills/api_keys.dart';
+import '../../../domain/entity/actor_details.dart';
+import '../../../domain/entity/actors.dart';
 import '../../../domain/entity/movie.dart';
+import '../../../domain/entity/movie_details.dart';
 import '../../../domain/entity/movie_vedio.dart';
+import '../../../domain/entity/recommendations_movie.dart';
 import '../../../domain/useCase/get_actors_movie.dart';
+import '../../../domain/useCase/get_recommendations_movie.dart';
+import '../../../domain/useCase/get_search_movie_use_case.dart';
+import '../../../domain/useCase/movie_details_use_case.dart';
 import '../../models/actore_detailes.dart';
+import '../../models/actors_model.dart';
+import '../../models/movie_details_model.dart';
+import '../../models/movie_model.dart';
 import '../../models/movie_video_model.dart';
+import '../../models/recommendation_model.dart';
 
 abstract class BaseRemoteMovieDataSource {
   Future<List<Movie>> getNowPlayingMovie();
@@ -81,8 +79,7 @@ class RemoteMovieDataSource extends BaseRemoteMovieDataSource {
 
   @override
   Future<MovieDetailsModel> getMovieDetails(
-    MovieDetailsParameters parameters,
-  ) async {
+      MovieDetailsParameters parameters) async {
     final response = await Dio().get(
       AppConstant.movieDetailsPath(parameters.movieId!),
     );

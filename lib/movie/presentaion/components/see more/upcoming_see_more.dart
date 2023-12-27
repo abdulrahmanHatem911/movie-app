@@ -1,10 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/utills/contant.dart';
+import '../../../../core/utills/api_keys.dart';
 import '../../../../core/utills/enum.dart';
 import '../../../../core/widgets/loading_widget.dart';
 import '../../controller/moice_event.dart';
@@ -72,19 +70,20 @@ class UpcomingSeeMoreComponent extends StatelessWidget {
                           children: [
                             Text(
                               movie.title,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
                               style: const TextStyle(
-                                fontSize: 18.0,
+                                height: 1.2,
+                                fontSize: 16.0,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            const SizedBox(height: 8.0),
+                            const SizedBox(height: 3.0),
                             Row(
                               children: [
                                 Container(
                                   padding: const EdgeInsets.symmetric(
-                                    vertical: 2.0,
-                                    horizontal: 8.0,
-                                  ),
+                                      vertical: 2.0, horizontal: 5.0),
                                   decoration: BoxDecoration(
                                     color: Colors.red[400],
                                     borderRadius: BorderRadius.circular(4.0),
@@ -92,32 +91,32 @@ class UpcomingSeeMoreComponent extends StatelessWidget {
                                   child: Text(
                                     movie.releaseDate.split('-')[0],
                                     style: const TextStyle(
-                                      fontSize: 16.0,
+                                      fontSize: 12.0,
                                       fontWeight: FontWeight.w500,
                                     ),
                                   ),
                                 ),
-                                const SizedBox(width: 10.0),
+                                const SizedBox(width: 5.0),
                                 Row(
                                   children: [
                                     const Icon(
                                       Icons.star,
                                       color: Colors.amber,
-                                      size: 20.0,
+                                      size: 18.0,
                                     ),
                                     const SizedBox(width: 4.0),
                                     Text(
                                       (movie.voteAverage / 2)
                                           .toStringAsFixed(1),
                                       style: const TextStyle(
-                                        fontSize: 16.0,
+                                        fontSize: 14.0,
                                         fontWeight: FontWeight.w500,
                                         letterSpacing: 1.2,
                                       ),
                                     ),
                                     const SizedBox(width: 4.0),
                                     Text(
-                                      '(${movie.voteAverage})',
+                                      '(${(movie.voteAverage * 10).toInt()})',
                                       style: const TextStyle(
                                         fontSize: 14.0,
                                         fontWeight: FontWeight.w500,
@@ -128,7 +127,7 @@ class UpcomingSeeMoreComponent extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 8.0),
+                            const SizedBox(height: 5.0),
                             Text(
                               movie.overview,
                               maxLines: 2,

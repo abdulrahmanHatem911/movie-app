@@ -1,12 +1,10 @@
 import 'package:animate_do/animate_do.dart';
-import '../../screens/actor_detailse_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/utills/contant.dart';
-import '../../../../core/utills/enum.dart';
-import '../../../../core/widgets/loading_widget.dart';
+import '../../../../core/utills/api_keys.dart';
 import '../../controller/movie_details/movie_details_bloc.dart';
+import '../../screens/actor_detailse_screen.dart';
 
 class ActorMovieWidget extends StatelessWidget {
   const ActorMovieWidget({super.key});
@@ -46,8 +44,7 @@ class ActorMovieWidget extends StatelessWidget {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           image: DecorationImage(
-                            image: actor.profilePath == null ||
-                                    actor.profilePath.isEmpty
+                            image: actor.profilePath.isEmpty
                                 ? NetworkImage(
                                     'https://image.tmdb.org/t/p/w500/borthNRiTGa7oKZjLKHuUGUrZdq.jpg')
                                 : NetworkImage(
@@ -64,14 +61,14 @@ class ActorMovieWidget extends StatelessWidget {
                       children: [
                         Text(
                           actor.name,
-                          style: Theme.of(context).textTheme.bodyText1,
+                          style: Theme.of(context).textTheme.bodyLarge,
                         ),
                         SizedBox(
                           height: 5.0,
                         ),
                         Text(
                           actor.character,
-                          style: Theme.of(context).textTheme.bodyText2,
+                          style: Theme.of(context).textTheme.bodyMedium,
                         ),
                       ],
                     ),

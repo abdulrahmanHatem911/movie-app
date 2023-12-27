@@ -1,12 +1,11 @@
-import '../app_color/dark_app_color.dart';
 import 'package:flutter/material.dart';
+
+import '../app_color/dark_app_color.dart';
 
 class AppDarkTheme {
   static ThemeData darkThemeData = ThemeData(
-    appBarTheme: AppBarTheme(
-      color: AppColorDark.appBarColor,
-      elevation: 0,
-    ),
+    useMaterial3: true,
+    appBarTheme: AppBarTheme(color: AppColorDark.appBarColor, elevation: 0),
     brightness: Brightness.dark,
     scaffoldBackgroundColor: AppColorDark.scaffoldColor,
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(

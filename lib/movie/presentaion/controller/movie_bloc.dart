@@ -1,22 +1,18 @@
 import 'dart:async';
 
-import 'package:dio/dio.dart';
-import '../../../core/utills/base_use_case.dart';
-import '../../../core/utills/contant.dart';
-import '../../data/models/movie_model.dart';
-import '../../domain/useCase/get_search_movie_use_case.dart';
-import '../../domain/useCase/get_upcoming_movie.dart';
-import '../../domain/useCase/movie_details_use_case.dart';
-import 'moice_event.dart';
-import 'movie_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../core/utills/base_use_case.dart';
 import '../../../core/utills/enum.dart';
 import '../../domain/entity/movie.dart';
 import '../../domain/useCase/get_now_playing_movie.dart';
 import '../../domain/useCase/get_popular_movie.dart';
+import '../../domain/useCase/get_search_movie_use_case.dart';
 import '../../domain/useCase/get_toprated_movie.dart';
-import '../screens/movies_screen.dart';
+import '../../domain/useCase/get_upcoming_movie.dart';
+import '../../domain/useCase/movie_details_use_case.dart';
+import 'moice_event.dart';
+import 'movie_state.dart';
 
 class MovieBloc extends Bloc<MoviesEvent, MovieState> {
   final GetNowPlayingMovie getNowPlayingMovie;
@@ -28,6 +24,8 @@ class MovieBloc extends Bloc<MoviesEvent, MovieState> {
   int refreshPopularMoviePage = 1;
   List<Movie> getRefreshTopRatedList = [];
   int refreshTopRatedMoviePage = 1;
+  List<Movie> getRefreshUpcomingList = [];
+  int refreshUpcomingMoviePage = 1;
   int index = 0;
   MovieBloc(
     this.getNowPlayingMovie,
@@ -62,11 +60,9 @@ class MovieBloc extends Bloc<MoviesEvent, MovieState> {
   }
 
   FutureOr<void> _getPopularMovies(
-    GetPopularMoviesEvent event,
-    Emitter<MovieState> emit,
-  ) async {
+      GetPopularMoviesEvent event, Emitter<MovieState> emit) async {
     final result = await getPopularMovie
-        .call(MovieDetailsParameters(page: refreshPopularMoviePage++));
+        .call(MovieDetailsParameters(page: refreshPopularMoviePage));
 
     result.fold(
         (l) => emit(state.copyWith(
@@ -74,7 +70,7 @@ class MovieBloc extends Bloc<MoviesEvent, MovieState> {
               popularMessage: l.message,
             )), (r) {
       getRefreshPopularList = getRefreshPopularList + r;
-
+      print("📍 length od the popule list is ${getRefreshPopularList.length}");
       emit(
         state.copyWith(
           popularState: RequestState.loaded,
@@ -82,25 +78,29 @@ class MovieBloc extends Bloc<MoviesEvent, MovieState> {
         ),
       );
     });
+    refreshPopularMoviePage++;
   }
 
 //
   FutureOr<void> _getTopRatedMovies(
-    GetTopRatedMoviesEvent event,
-    Emitter<MovieState> emit,
-  ) async {
+      GetTopRatedMoviesEvent event, Emitter<MovieState> emit) async {
     final result = await getTopRatedMovie.call(
-      MovieDetailsParameters(page: refreshTopRatedMoviePage++),
+      MovieDetailsParameters(page: refreshTopRatedMoviePage),
     );
     result.fold(
-      (l) => emit(state.copyWith(
-        topRatedState: RequestState.error,
-        topRatedMessage: l.message,
-      )),
-      (r) => emit(
-        state.copyWith(topRatedState: RequestState.loaded, topRatedMovies: r),
-      ),
-    );
+        (l) => emit(state.copyWith(
+              topRatedState: RequestState.error,
+              topRatedMessage: l.message,
+            )), (r) {
+      getRefreshTopRatedList = getRefreshTopRatedList + r;
+      emit(
+        state.copyWith(
+          topRatedState: RequestState.loaded,
+          topRatedMovies: getRefreshTopRatedList,
+        ),
+      );
+    });
+    refreshTopRatedMoviePage++;
   }
 
   FutureOr<void> _getUpcomingMovie(
