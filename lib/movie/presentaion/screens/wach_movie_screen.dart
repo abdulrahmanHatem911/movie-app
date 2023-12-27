@@ -12,18 +12,17 @@ class WatchMoviesView extends StatefulWidget {
 }
 
 class _WatchMoviesViewState extends State<WatchMoviesView> {
-  late final WebViewController _controller;
+  WebViewController? _controller;
   bool _isLandscape = false;
   @override
   void initState() {
+    super.initState();
     _controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setBackgroundColor(const Color(0x00000000))
       ..setNavigationDelegate(
         NavigationDelegate(
-          onProgress: (int progress) {
-            // Update loading bar.
-          },
+          onProgress: (int progress) {},
           onPageStarted: (String url) {},
           onPageFinished: (String url) {},
           onWebResourceError: (WebResourceError error) {},
@@ -35,8 +34,12 @@ class _WatchMoviesViewState extends State<WatchMoviesView> {
           },
         ),
       )
-      ..loadRequest(Uri.parse('${AppConstant.VIDEOBASEURL}/${widget.movieID}'));
-    super.initState();
+      ..loadRequest(Uri.parse('${AppConstant.videoBaseUrl}${widget.movieID}'));
+  }
+
+  void dispose() {
+    _controller?.clearCache();
+    super.dispose();
   }
 
   @override
@@ -64,7 +67,7 @@ class _WatchMoviesViewState extends State<WatchMoviesView> {
           ),
         ],
       ),
-      body: WebViewWidget(controller: _controller),
+      body: WebViewWidget(controller: _controller!),
     );
   }
 }
