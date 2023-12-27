@@ -3,6 +3,13 @@
 Movies is an application designed to provide users with an enjoyable experience of watching movies and series. It offers a plethora of features that allow users to get all the details of the movie or series they are watching.
 ## Screenshots
 ![movie app_2](https://user-images.githubusercontent.com/88144060/192527481-c412e96b-7ebb-4db4-ab84-4a472a13be4b.png)
+
+## Watch the Demo
+
+Check out our [YouTube video](https://youtu.be/glC6gbfso8Q?si=qw3wrm7Xg2DP05WC) for a detailed demo of the Movies App.
+
+[![Watch the Demo](https://img.youtube.com/vi/glC6gbfso8Q/0.jpg)](https://youtu.be/glC6gbfso8Q?si=qw3wrm7Xg2DP05WC)
+
 ## Technologies Used
 
 | Technology | Link |
@@ -60,6 +67,22 @@ Movies uses the following third-party libraries:
 
 Movies is licensed under the MIT license. 
 
-## Contact
+### <img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="25px"> Follow me :
 
-If you have any questions or feedback, please reach out to us at [].
+<div id="badges">
+<a href="https://abdurlahmanhatem.vercel.app/">
+    <img src="https://img.shields.io/badge/Website-9cf?style=for-the-badge&logo=google-chrome&logoColor=white" alt="Profile "/>
+  </a>
+  
+  <a href="https://www.linkedin.com/in/abdulrahman-hatem-64780a210">
+    <img src="https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn Badge"/>
+  </a>
+  <a href="https://twitter.com/Abdelra87827997">
+    <img src="https://img.shields.io/badge/Twitter-blue?style=for-the-badge&logo=twitter&logoColor=white" alt="Twitter Badge"/>
+  </a>
+   <a href="https://www.youtube.com/@AlHatemSoftware">
+    <img src="https://img.shields.io/badge/YouTube-red?style=for-the-badge&logo=youtube&logoColor=white" alt="Youtube Badge"/>
+  </a>
+  
+</div>
+
